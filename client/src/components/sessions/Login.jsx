@@ -3,10 +3,12 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { headers } from '../../Globals'
 import { UserContext } from '../../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
 
   const { login } = useContext(UserContext)
+  const navigate = useNavigate()
 
   const initialValues = {
     username: "",
@@ -31,6 +33,7 @@ const Login = () => {
       if (resp.status == 200) {
         const user = await resp.json()
         login(user)
+        navigate("/books")
       } else {
         console.log('oops something went wrong')
       }

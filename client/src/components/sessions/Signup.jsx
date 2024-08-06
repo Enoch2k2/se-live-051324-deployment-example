@@ -3,10 +3,12 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { headers } from '../../Globals'
 import { UserContext } from '../../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 const Signup = () => {
 
   const { login } = useContext(UserContext)
+  const navigate = useNavigate()
 
   const initialValues = {
     username: "",
@@ -30,6 +32,7 @@ const Signup = () => {
       })
       const user = await resp.json()
       login(user)
+      navigate("/books")
     }
   })
 
